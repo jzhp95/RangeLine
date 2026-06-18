@@ -31,6 +31,9 @@ jobs:
       - name: Flutter pub get
         run: flutter pub get
 
+      - name: Generate code (drift/build_runner)
+        run: dart run build_runner build
+
       - name: Build APK (release)
         run: flutter build apk --release
 
@@ -61,6 +64,9 @@ jobs:
 
       - name: Flutter pub get
         run: flutter pub get
+
+      - name: Generate code (drift/build_runner)
+        run: dart run build_runner build
 
       - name: Build iOS (release, no codesign)
         run: flutter build ios --release --no-codesign
