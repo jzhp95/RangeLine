@@ -68,7 +68,7 @@ class _SaveButtonState extends State<SaveButton> with SingleTickerProviderStateM
         width: double.infinity,
         height: 52,
         child: FilledButton(
-          onPressed: widget.onPressed,
+          onPressed: widget.enabled ? widget.onPressed : null,
           style: FilledButton.styleFrom(
             backgroundColor: bg,
             foregroundColor: AppColors.onPrimary,

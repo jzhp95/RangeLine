@@ -73,6 +73,23 @@ class AppDatabase extends _$AppDatabase {
     return _toFuelRecord(rows.first);
   }
 
+  Future<FuelRecord?> getPreviousFuelRecordExcluding({
+    required int beforeMileage,
+    required int excludeId,
+  }) async {
+    final rows = await (select(records)
+          ..where(
+            (t) =>
+                t.type.equals('fuel') &
+                t.mileage.isSmallerThanValue(beforeMileage) &
+                t.id.equals(excludeId).not(),
+          )
+          ..orderBy([(t) => OrderingTerm.desc(t.mileage)]))
+        .get();
+    if (rows.isEmpty) return null;
+    return _toFuelRecord(rows.first);
+  }
+
   Future<int> insertFuelRecord(RecordsCompanion companion) {
     return into(records).insert(companion);
   }
